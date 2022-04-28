@@ -1,4 +1,4 @@
-package com.cs210.nothingtoeat;
+package com.cs210.nothingtoeat.model;
 
 public class Meat {
     private String type;    //chicken, beef, fish

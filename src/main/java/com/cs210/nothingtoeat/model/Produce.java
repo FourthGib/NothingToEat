@@ -1,4 +1,4 @@
-package com.cs210.nothingtoeat;
+package com.cs210.nothingtoeat.model;
 
 import java.util.Objects;
 
