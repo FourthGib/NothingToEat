@@ -69,7 +69,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.cs210.nothingtoeat/com.cs210.nothingtoeat.HelloApplication</mainClass>
+                            <mainClass>com.cs210.nothingtoeat/com.cs210.nothingtoeat.view.View</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
