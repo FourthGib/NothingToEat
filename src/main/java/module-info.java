@@ -3,6 +3,7 @@ module com.cs210.nothingtoeat {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.datatransfer;
 
     opens com.cs210.nothingtoeat to javafx.fxml;
   //  exports com.cs210.nothingtoeat;

@@ -1,25 +1,11 @@
 package com.cs210.nothingtoeat.view;
 
-//import com.example.food.controller.Controller;
-//import com.example.food.model.Food;
-//import com.example.food.model.Meat;
-//import com.example.food.model.Pantry;
-//import com.example.food.model.Recipe;
 import com.cs210.nothingtoeat.controller.Controller;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.CubicCurve;
-import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class MainScene extends Scene {
@@ -34,12 +20,12 @@ public class MainScene extends Scene {
     private Label title = new Label("\tNothing to Eat!");
 
     //main page button selection
-    private Button addToStock = new Button("Add to Stock");
-    private Button removeFromStock = new Button("Remove from Stock");
-    private Button generateFromStock = new Button("Generate from Stock");
-    private Button generateShoppingList = new Button("Generate Shopping List");
-    private Button addRecipe = new Button("Add Recipe");
-    private Button viewMyStock = new Button("View My Stock");
+    private Button addToStockButton = new Button("Add to Stock");
+    private Button removeFromStockButton = new Button("Remove from Stock");
+    private Button generateFromStockButton = new Button("Generate from Stock");
+    private Button generateShoppingListButton = new Button("Generate Shopping List");
+    private Button addRecipeButton = new Button("Add Recipe");
+    private Button viewMyStockButton = new Button("View My Stock");
 
 
 
@@ -59,49 +45,58 @@ public class MainScene extends Scene {
         pane.getColumnConstraints().add(colC);
         pane.setAlignment(Pos.CENTER);
 
-        //6 buttons - addToStock, removeFromStock, generateFromStock, generateShoppingList, addRecipe, myStock
+        //6 buttons - addToStockButton, removeFromStockButton, generateFromStockButton, generateShoppingListButton, addRecipeButton, myStock
         //stored in a VBox all with the same WIDTH and HEIGHT
         //TODO: find way to make title bold, larger and centered
 
 
-        addToStock.setPrefWidth(BUTTON_WIDTH);
-        addToStock.setPrefHeight(BUTTON_HEIGHT);
-        addToStock.setStyle("-fx-background-color: #fdf0ca; -fx-border-color: BLACK ");
+        addToStockButton.setPrefWidth(BUTTON_WIDTH);
+        addToStockButton.setPrefHeight(BUTTON_HEIGHT);
+        addToStockButton.setStyle("-fx-background-color: #fdf0ca; -fx-border-color: BLACK ");
 
-        removeFromStock.setPrefWidth(BUTTON_WIDTH);
-        removeFromStock.setPrefHeight(BUTTON_HEIGHT);
-        removeFromStock.setStyle("-fx-background-color: #f6ccca; -fx-border-color: BLACK");
+        removeFromStockButton.setPrefWidth(BUTTON_WIDTH);
+        removeFromStockButton.setPrefHeight(BUTTON_HEIGHT);
+        removeFromStockButton.setStyle("-fx-background-color: #f6ccca; -fx-border-color: BLACK");
 
-        generateFromStock.setPrefWidth(BUTTON_WIDTH);
-        generateFromStock.setPrefHeight(BUTTON_HEIGHT);
-        generateFromStock.setStyle("-fx-background-color: #d8e6fa; -fx-border-color: BLACK");
+        generateFromStockButton.setPrefWidth(BUTTON_WIDTH);
+        generateFromStockButton.setPrefHeight(BUTTON_HEIGHT);
+        generateFromStockButton.setStyle("-fx-background-color: #d8e6fa; -fx-border-color: BLACK");
 
-        generateShoppingList.setPrefWidth(BUTTON_WIDTH);
-        generateShoppingList.setPrefHeight(BUTTON_HEIGHT);
-        generateShoppingList.setStyle("-fx-background-color: #d3e6d2; -fx-border-color: BLACK");
+        generateShoppingListButton.setPrefWidth(BUTTON_WIDTH);
+        generateShoppingListButton.setPrefHeight(BUTTON_HEIGHT);
+        generateShoppingListButton.setStyle("-fx-background-color: #d3e6d2; -fx-border-color: BLACK");
 
-        addRecipe.setPrefHeight(BUTTON_HEIGHT);
-        addRecipe.setPrefWidth(BUTTON_WIDTH);
-        addRecipe.setStyle("-fx-background-color: #dfd3e5; -fx-border-color: BLACK");
+        addRecipeButton.setPrefHeight(BUTTON_HEIGHT);
+        addRecipeButton.setPrefWidth(BUTTON_WIDTH);
+        addRecipeButton.setStyle("-fx-background-color: #dfd3e5; -fx-border-color: BLACK");
 
-        viewMyStock.setPrefWidth(BUTTON_WIDTH);
-        viewMyStock.setPrefHeight(BUTTON_HEIGHT);
-        viewMyStock.setStyle("-fx-background-color: #fde4ca; -fx-border-color: BLACK");
+        viewMyStockButton.setPrefWidth(BUTTON_WIDTH);
+        viewMyStockButton.setPrefHeight(BUTTON_HEIGHT);
+        viewMyStockButton.setStyle("-fx-background-color: #fde4ca; -fx-border-color: BLACK");
 
         VBox mainButtonSelectionHB = new VBox();
         mainButtonSelectionHB.setSpacing(15);
         mainButtonSelectionHB.getChildren().add(title);
-        mainButtonSelectionHB.getChildren().add(addToStock);
-        mainButtonSelectionHB.getChildren().add(removeFromStock);
-        mainButtonSelectionHB.getChildren().add(generateFromStock);
-        mainButtonSelectionHB.getChildren().add(generateShoppingList);
-        mainButtonSelectionHB.getChildren().add(addRecipe);
-        mainButtonSelectionHB.getChildren().add(viewMyStock);
+        mainButtonSelectionHB.getChildren().add(addToStockButton);
+        mainButtonSelectionHB.getChildren().add(removeFromStockButton);
+        mainButtonSelectionHB.getChildren().add(generateFromStockButton);
+        mainButtonSelectionHB.getChildren().add(generateShoppingListButton);
+        mainButtonSelectionHB.getChildren().add(addRecipeButton);
+        mainButtonSelectionHB.getChildren().add(viewMyStockButton);
         //oddly if we change the 1,1 to 0,0 is removes our button sizes
         pane.add(mainButtonSelectionHB, 1,1);
 
+        //addToStockButton setOnAction to call addToStock()
+        addToStockButton.setOnAction(event->addToStock());
 
         //dont remove
         this.setRoot(pane);
+    }
+
+    private void addToStock()
+    { //TODO - should present a new display
+        ViewNavigator.loadScene("add to stock", new addToStockView());
+
+
     }
 }

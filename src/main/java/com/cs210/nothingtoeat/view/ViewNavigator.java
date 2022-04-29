@@ -7,7 +7,7 @@ public class ViewNavigator {
     public static void setStage(Stage stage){
         mainStage = stage;
     }
-    public static void loadScene(String title, MainScene scene) {
+    public static void loadScene(String title, Scene scene) {
         mainStage.setTitle(title);
         mainStage.setScene(scene);
         mainStage.show();
