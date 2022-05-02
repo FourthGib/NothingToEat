@@ -4,6 +4,7 @@ import com.cs210.nothingtoeat.controller.Controller;
 import com.cs210.nothingtoeat.model.Ingredient;
 import com.cs210.nothingtoeat.model.Meat;
 import com.cs210.nothingtoeat.model.Produce;
+import com.cs210.nothingtoeat.model.Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -40,13 +41,14 @@ public class addToStockView extends Scene {
     private Label pantryLabel = new Label("Pantry");
 
     private Produce selectedProduce;
-    private ObservableList<Produce> produceList;
-    private ObservableList<Ingredient> ingredientsList;
-    private ObservableList<Meat> meatList;
+    private ObservableList<Produce> produceObservableList;
+    private ObservableList<Ingredient> ingredientsObservableList;
+    private ObservableList<Meat> meatObservableList;
 
     private Button addButton = new Button("Add");
 
     private Controller controller = Controller.getInstance();
+    private Stock stock = Stock.getInstance();
 
     public addToStockView() {
         super(new GridPane(), MainScene.WIDTH, MainScene.HEIGHT);
@@ -117,40 +119,37 @@ public class addToStockView extends Scene {
            type = meatCB.getSelectionModel().getSelectedItem();
            Meat m = new Meat(type);
            //check for dupes
-           if(!(meatList.contains(m)) )
-                meatList.add(m);
+           stock.addToStock(m);
        }
       if(produceType != null)
       {
           type = produceTypeCB.getSelectionModel().getSelectedItem();
           Produce p = new Produce((type));
-          if(!(produceList.contains(p)))
-            produceList.add(p);
+          stock.addToStock(p);
       }
       if(dairyTF != null)
       {
           name = dairyTF.getText();
           Ingredient i = new Ingredient("Dairy", name);
-          if(!(ingredientsList.contains(i)))
-            ingredientsList.add(i);
+          stock.addToStock(i);
       }
       if(seasoningTF != null)
       {
           name = seasoningTF.getText();
           Ingredient i = new Ingredient("Seasoning", name);
-          if(!(ingredientsList.contains(i)))
-            ingredientsList.add(i);
+          stock.addToStock(i);
       }
         if(pantryTF != null)
         {
             name = pantryTF.getText();
             Ingredient i = new Ingredient("Pantry", name);
-            if(!(ingredientsList.contains(i)))
-                ingredientsList.add(i);
+            stock.addToStock(i);
         }
 
         //clear fields
         clearInputs();
+
+        //TODO: Return to Main Screen somehow.
 
     }
 

@@ -11,9 +11,9 @@ public class Stock {
     private static Stock stockInstance = null;
 
     private Stock(){
-        ingredients = null;
-        meatList = null;
-        produceList = null;
+        ingredients = new ArrayList<>();
+        meatList = new ArrayList<>();
+        produceList = new ArrayList<>();
     }
 
     public static Stock getInstance(){
