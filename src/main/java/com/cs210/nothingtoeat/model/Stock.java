@@ -1,7 +1,8 @@
 package com.cs210.nothingtoeat.model;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class Stock {
 
@@ -10,7 +11,10 @@ public class Stock {
     private ArrayList<Produce> produceList;
     private ArrayList<Recipe> recipeList;
 
-    private static final String FILE_NAME = "RecipeList.dat";
+    private static final String RECIPE_FILE = "RecipeList.dat";
+    private static final String MEAT_FILE = "MeatList.dat";
+    private static final String PRODUCE_FILE = "ProduceList.dat";
+    private static final String INGREDIENT_FILE = "IngredientList.dat";
 
     private static Stock stockInstance = null;
 
@@ -26,6 +30,79 @@ public class Stock {
             stockInstance = new Stock();
         return  stockInstance;
     }
+
+    private void populateList(String fileName){
+        try {
+            File binaryFile = new File(fileName);
+            if (binaryFile.exists()) {
+                ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(binaryFile));
+                if (fileName.equals(RECIPE_FILE)){
+                    recipeList = (ArrayList<Recipe>) fileReader.readObject();
+                }
+                if (fileName.equals(MEAT_FILE)){
+                    meatList = (ArrayList<Meat>) fileReader.readObject();
+                }
+                if (fileName.equals(PRODUCE_FILE)){
+                    produceList = (ArrayList<Produce>) fileReader.readObject();
+                }
+                if (fileName.equals(INGREDIENT_FILE)){
+                    ingredients = (ArrayList<Ingredient>) fileReader.readObject();
+                }
+                fileReader.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: ");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Unknown IO exception: ");
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Object is not filling the list.");
+            e.printStackTrace();
+        }
+    }
+
+    public void populateStock(){
+        populateList(RECIPE_FILE);
+        populateList(MEAT_FILE);
+        populateList(PRODUCE_FILE);
+        populateList(INGREDIENT_FILE);
+    }
+
+    private void saveList(String fileName){
+        try{
+            File binaryFile = new File(fileName);
+            ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream(binaryFile));
+            if (fileName.equals(RECIPE_FILE)){
+                fileWriter.writeObject(recipeList);
+            }
+            if (fileName.equals(MEAT_FILE)){
+                fileWriter.writeObject(meatList);
+            }
+            if (fileName.equals(PRODUCE_FILE)){
+                fileWriter.writeObject(produceList);
+            }
+            if (fileName.equals(INGREDIENT_FILE)){
+                fileWriter.writeObject(ingredients);
+            }
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: ");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Unexpected IO error: ");
+            e.printStackTrace();
+        }
+    }
+
+    public void saveStock(){
+        saveList(RECIPE_FILE);
+        saveList(MEAT_FILE);
+        saveList(PRODUCE_FILE);
+        saveList(INGREDIENT_FILE);
+    }
+
 
     public boolean addToStock(Ingredient ingredient){
         if (!ingredients.isEmpty() && !ingredients.contains(ingredient)) {
@@ -191,4 +268,6 @@ public class Stock {
     public ArrayList<Produce> getProduceList() {
         return produceList;
     }
+
+
 }
