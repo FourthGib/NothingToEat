@@ -2,20 +2,22 @@ package com.cs210.nothingtoeat.model;
 
 import java.util.ArrayList;
 
+
 public class MainDish extends Dish {
 
-    private Meat meatType;
+    private Meat meat; //chicken, beef, fish
 
     MainDish(String name, ArrayList<Ingredient> ingredients, Meat meatType){
         super(name, ingredients);
-        this.meatType = meatType;
+        this.meat = meatType;
     }
 
-    public Meat getMeatType() {
-        return meatType;
+    public Meat getMeat() {
+        return meat;
     }
 
-    public void setMeatType(Meat meatType) {
-        this.meatType = meatType;
+    public void setMeat(Meat meat) {
+        this.meat = meat;
     }
+
 }

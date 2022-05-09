@@ -3,6 +3,7 @@ package com.cs210.nothingtoeat.model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class Recipe {
 
     private String name;
@@ -10,7 +11,7 @@ public class Recipe {
     private Produce produce;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> directions;
-    private String preparation; //boiled, grilled, fried
+    private String preparation; //boiled, grilled, fried, baked
 
     public Recipe(String name, Meat meat, Produce produce, ArrayList<Ingredient> ingredients,
                   ArrayList<String> directions, String preparation) {
@@ -20,6 +21,15 @@ public class Recipe {
         this.ingredients = ingredients;
         this.directions = directions;
         this.preparation = preparation;
+    }
+
+    public Recipe(){
+        this.name = "name";
+        this.meat = new Meat("meat");
+        this.produce = new Produce("produce");
+        this.ingredients = null;
+        this.directions = null;
+        this.preparation = "";
     }
 
     public String getName() {
