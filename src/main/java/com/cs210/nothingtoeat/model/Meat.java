@@ -1,6 +1,8 @@
 package com.cs210.nothingtoeat.model;
 
-public class Meat {
+import java.io.Serializable;
+
+public class Meat implements Serializable {
     private String type;    //chicken, beef, fish
 
     public Meat(String type) {

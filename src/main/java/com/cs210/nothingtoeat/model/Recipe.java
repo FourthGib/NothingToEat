@@ -1,10 +1,11 @@
 package com.cs210.nothingtoeat.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Recipe {
+public class Recipe implements Serializable {
 
     private String name;
     private Meat meat; //chicken, beef, fish

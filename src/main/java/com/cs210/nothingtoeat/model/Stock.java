@@ -105,24 +105,31 @@ public class Stock {
 
 
     public boolean addToStock(Ingredient ingredient){
-        if (!ingredients.isEmpty() && !ingredients.contains(ingredient)) {
+        if (!ingredients.contains(ingredient)) {
             ingredients.add(ingredient);
+            System.out.println("Added Ingredient");
+            saveStock();
+            System.out.println("Stock Saved");
             return true;
         }
         return false;
     }
 
     public boolean addToStock(Meat meat){
-        if (!meatList.isEmpty() && !meatList.contains(meat)) {
+        if (!meatList.contains(meat)) {
             meatList.add(meat);
+            saveStock();
+            System.out.println("Stock Saved");
             return true;
         }
         return false;
     }
 
     public boolean addToStock(Produce produce){
-        if (!produceList.isEmpty() && !produceList.contains(produce)) {
+        if (!produceList.contains(produce)) {
             produceList.add(produce);
+            saveStock();
+            System.out.println("Stock Saved");
             return true;
         }
         return false;
@@ -131,6 +138,8 @@ public class Stock {
     public boolean removeFromStock(Ingredient ingredient){
         if (!ingredients.isEmpty()) {
             ingredients.remove(ingredient);
+            saveStock();
+            System.out.println("Stock Saved");
         }
         return false;
     }
@@ -138,6 +147,8 @@ public class Stock {
     public boolean removeFromStock(Meat meat){
         if (!meatList.isEmpty()) {
             meatList.remove(meat);
+            saveStock();
+            System.out.println("Stock Saved");
         }
         return false;
     }
@@ -145,20 +156,28 @@ public class Stock {
     public boolean removeFromStock(Produce produce){
         if (!produceList.isEmpty()) {
             produceList.remove(produce);
+            saveStock();
+            System.out.println("Stock Saved");
         }
         return false;
     }
 
     public boolean addRecipe(Recipe recipe){
         if (!recipeList.contains(recipe)) {
-            return recipeList.add(recipe);
+            recipeList.add(recipe);
+            saveStock();
+            System.out.println("Stock Saved");
+            return true;
         }
         return false;
     }
 
     public boolean removeRecipe(Recipe recipe){
         if (!recipeList.isEmpty()) {
-            return recipeList.remove(recipe);
+            recipeList.remove(recipe);
+            saveStock();
+            System.out.println("Stock Saved");
+            return true;
         }
         return false;
     }
@@ -241,6 +260,10 @@ public class Stock {
             //fried
             if (preparation.equalsIgnoreCase("fried")) {
                 //most produce needs to be fried for ____ min at a temp of ____
+            }
+            //raw
+            if (preparation.equalsIgnoreCase("raw")) {
+                //when you want to make a salad or uncooked prep
             }
         }
         //

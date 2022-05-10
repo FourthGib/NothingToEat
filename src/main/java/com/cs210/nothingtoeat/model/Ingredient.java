@@ -1,6 +1,8 @@
 package com.cs210.nothingtoeat.model;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     private String type; //dairy, seasoning, pantry
     private String name;
 

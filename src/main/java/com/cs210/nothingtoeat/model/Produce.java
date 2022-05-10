@@ -1,8 +1,9 @@
 package com.cs210.nothingtoeat.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Produce {
+public class Produce implements Serializable {
     private String type;
 
     public Produce(String type) {
