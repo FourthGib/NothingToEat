@@ -27,4 +27,11 @@ public class Ingredient implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

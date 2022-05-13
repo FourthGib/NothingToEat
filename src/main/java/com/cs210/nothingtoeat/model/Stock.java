@@ -1,5 +1,7 @@
 package com.cs210.nothingtoeat.model;
 
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -10,6 +12,10 @@ public class Stock {
     private ArrayList<Meat> meatList;
     private ArrayList<Produce> produceList;
     private ArrayList<Recipe> recipeList;
+
+    private ObservableList<Ingredient> mAllIngredients;
+    private ObservableList<Produce> mAllProduce;
+    private ObservableList<Meat> mAllMeat;
 
     private static final String RECIPE_FILE = "RecipeList.dat";
     private static final String MEAT_FILE = "MeatList.dat";
@@ -31,7 +37,7 @@ public class Stock {
         return  stockInstance;
     }
 
-    private void populateList(String fileName){
+    protected void populateList(String fileName){
         try {
             File binaryFile = new File(fileName);
             if (binaryFile.exists()) {
@@ -41,12 +47,15 @@ public class Stock {
                 }
                 if (fileName.equals(MEAT_FILE)){
                     meatList = (ArrayList<Meat>) fileReader.readObject();
+                    mAllMeat = (ObservableList<Meat>) meatList;
                 }
                 if (fileName.equals(PRODUCE_FILE)){
                     produceList = (ArrayList<Produce>) fileReader.readObject();
+                    mAllProduce = (ObservableList<Produce>) produceList;
                 }
                 if (fileName.equals(INGREDIENT_FILE)){
                     ingredients = (ArrayList<Ingredient>) fileReader.readObject();
+                    mAllIngredients = (ObservableList<Ingredient>) ingredients;
                 }
                 fileReader.close();
             }
@@ -62,6 +71,10 @@ public class Stock {
             e.printStackTrace();
         }
     }
+
+    public ObservableList<Ingredient> getAllIngredients(){return mAllIngredients;}
+    public ObservableList<Meat> getAllMeat(){return mAllMeat;}
+    public ObservableList<Produce> getAllProduce(){return mAllProduce;}
 
     public void populateStock(){
         populateList(RECIPE_FILE);
@@ -107,9 +120,12 @@ public class Stock {
     public boolean addToStock(Ingredient ingredient){
         if (!ingredients.contains(ingredient)) {
             ingredients.add(ingredient);
-            System.out.println("Added Ingredient");
+            System.out.println("Added Ingredient: " + ingredient);
             saveStock();
             System.out.println("Stock Saved");
+
+         for(Ingredient i : ingredients )
+                System.out.println(i);
             return true;
         }
         return false;
@@ -118,9 +134,14 @@ public class Stock {
     public boolean addToStock(Meat meat){
         if (!meatList.contains(meat)) {
             meatList.add(meat);
+            System.out.println("Added Meat: " + meat);
             saveStock();
             System.out.println("Stock Saved");
+            for(Meat i : meatList )
+                System.out.println(i);
+
             return true;
+
         }
         return false;
     }
@@ -128,9 +149,14 @@ public class Stock {
     public boolean addToStock(Produce produce){
         if (!produceList.contains(produce)) {
             produceList.add(produce);
+            System.out.println("Added produce: " + produce);
             saveStock();
             System.out.println("Stock Saved");
+
+            for(Produce i : produceList )
+                System.out.println(i);
             return true;
+
         }
         return false;
     }

@@ -24,4 +24,11 @@ public class Meat implements Serializable {
         Meat meat = (Meat) o;
         return type.equals(meat.type);
     }
+
+    @Override
+    public String toString() {
+        return "Meat{" +
+                "type='" + type + '\'' +
+                '}';
+    }
 }

@@ -88,14 +88,21 @@ public class MainScene extends Scene {
 
         //addToStockButton setOnAction to call addToStock()
         addToStockButton.setOnAction(event->addToStock());
+        removeFromStockButton.setOnAction(event-> removeScene());
 
         //dont remove
         this.setRoot(pane);
     }
 
     private void addToStock()
-    { //TODO - should present a new display
-        ViewNavigator.loadScene("add to stock", new addToStockView());
+    {
+        ViewNavigator.loadScene("Add To Stock", new addToStockView());
+
+
+    }
+    private void removeScene()
+    {
+        ViewNavigator.loadScene("Remove From Stock", new removeScene());
 
 
     }

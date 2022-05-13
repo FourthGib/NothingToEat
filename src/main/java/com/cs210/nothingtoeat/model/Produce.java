@@ -26,4 +26,10 @@ public class Produce implements Serializable {
         return Objects.equals(type, produce.type);
     }
 
+    @Override
+    public String toString() {
+        return "Produce{" +
+                "type='" + type + '\'' +
+                '}';
+    }
 }
