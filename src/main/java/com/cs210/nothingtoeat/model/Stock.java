@@ -1,5 +1,6 @@
 package com.cs210.nothingtoeat.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
@@ -8,14 +9,10 @@ import java.io.IOException;
 
 public class Stock {
 
-    private ArrayList<Ingredient> ingredients;
-    private ArrayList<Meat> meatList;
-    private ArrayList<Produce> produceList;
-    private ArrayList<Recipe> recipeList;
-
     private ObservableList<Ingredient> mAllIngredients;
     private ObservableList<Produce> mAllProduce;
     private ObservableList<Meat> mAllMeat;
+    private ObservableList<Recipe> mAllRecipes;
 
     private static final String RECIPE_FILE = "RecipeList.dat";
     private static final String MEAT_FILE = "MeatList.dat";
@@ -25,10 +22,10 @@ public class Stock {
     private static Stock stockInstance = null;
 
     private Stock(){
-        ingredients = new ArrayList<>();
-        meatList = new ArrayList<>();
-        produceList = new ArrayList<>();
-        recipeList = new ArrayList<>();
+        mAllRecipes = FXCollections.observableArrayList();
+        mAllMeat = FXCollections.observableArrayList();
+        mAllProduce = FXCollections.observableArrayList();
+        mAllIngredients = FXCollections.observableArrayList();
     }
 
     public static Stock getInstance(){
@@ -43,19 +40,20 @@ public class Stock {
             if (binaryFile.exists()) {
                 ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(binaryFile));
                 if (fileName.equals(RECIPE_FILE)){
-                    recipeList = (ArrayList<Recipe>) fileReader.readObject();
+                    Recipe[] temp = (Recipe[]) fileReader.readObject();
+                    mAllRecipes.addAll(temp);
                 }
                 if (fileName.equals(MEAT_FILE)){
-                    meatList = (ArrayList<Meat>) fileReader.readObject();
-                    mAllMeat = (ObservableList<Meat>) meatList;
+                    Meat[] temp = (Meat[]) fileReader.readObject();
+                    mAllMeat.addAll(temp);
                 }
                 if (fileName.equals(PRODUCE_FILE)){
-                    produceList = (ArrayList<Produce>) fileReader.readObject();
-                    mAllProduce = (ObservableList<Produce>) produceList;
+                    Produce[] temp = (Produce[]) fileReader.readObject();
+                    mAllProduce.addAll(temp);
                 }
                 if (fileName.equals(INGREDIENT_FILE)){
-                    ingredients = (ArrayList<Ingredient>) fileReader.readObject();
-                    mAllIngredients = (ObservableList<Ingredient>) ingredients;
+                    Ingredient[] temp = (Ingredient[]) fileReader.readObject();
+                    mAllIngredients.addAll(temp);
                 }
                 fileReader.close();
             }
@@ -88,16 +86,32 @@ public class Stock {
             File binaryFile = new File(fileName);
             ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream(binaryFile));
             if (fileName.equals(RECIPE_FILE)){
-                fileWriter.writeObject(recipeList);
+                Recipe[] temp = new Recipe[mAllRecipes.size()];
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = mAllRecipes.get(i);
+                }
+                fileWriter.writeObject(temp);
             }
             if (fileName.equals(MEAT_FILE)){
-                fileWriter.writeObject(meatList);
+                Meat[] temp = new Meat[mAllMeat.size()];
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = mAllMeat.get(i);
+                }
+                fileWriter.writeObject(temp);
             }
             if (fileName.equals(PRODUCE_FILE)){
-                fileWriter.writeObject(produceList);
+                Produce[] temp = new Produce[mAllProduce.size()];
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = mAllProduce.get(i);
+                }
+                fileWriter.writeObject(temp);
             }
             if (fileName.equals(INGREDIENT_FILE)){
-                fileWriter.writeObject(ingredients);
+                Ingredient[] temp = new Ingredient[mAllIngredients.size()];
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = mAllIngredients.get(i);
+                }
+                fileWriter.writeObject(temp);
             }
             fileWriter.close();
         } catch (FileNotFoundException e) {
@@ -118,13 +132,13 @@ public class Stock {
 
 
     public boolean addToStock(Ingredient ingredient){
-        if (!ingredients.contains(ingredient)) {
-            ingredients.add(ingredient);
+        if (!mAllIngredients.contains(ingredient)) {
+            mAllIngredients.add(ingredient);
             System.out.println("Added Ingredient: " + ingredient);
             saveStock();
             System.out.println("Stock Saved");
 
-         for(Ingredient i : ingredients )
+         for(Ingredient i : mAllIngredients )
                 System.out.println(i);
             return true;
         }
@@ -132,12 +146,12 @@ public class Stock {
     }
 
     public boolean addToStock(Meat meat){
-        if (!meatList.contains(meat)) {
-            meatList.add(meat);
+        if (!mAllMeat.contains(meat)) {
+            mAllMeat.add(meat);
             System.out.println("Added Meat: " + meat);
             saveStock();
             System.out.println("Stock Saved");
-            for(Meat i : meatList )
+            for(Meat i : mAllMeat )
                 System.out.println(i);
 
             return true;
@@ -147,13 +161,13 @@ public class Stock {
     }
 
     public boolean addToStock(Produce produce){
-        if (!produceList.contains(produce)) {
-            produceList.add(produce);
+        if (!mAllProduce.contains(produce)) {
+            mAllProduce.add(produce);
             System.out.println("Added produce: " + produce);
             saveStock();
             System.out.println("Stock Saved");
 
-            for(Produce i : produceList )
+            for(Produce i : mAllProduce )
                 System.out.println(i);
             return true;
 
@@ -162,8 +176,8 @@ public class Stock {
     }
 
     public boolean removeFromStock(Ingredient ingredient){
-        if (!ingredients.isEmpty()) {
-            ingredients.remove(ingredient);
+        if (!mAllIngredients.isEmpty()) {
+            mAllIngredients.remove(ingredient);
             saveStock();
             System.out.println("Stock Saved");
         }
@@ -171,8 +185,8 @@ public class Stock {
     }
 
     public boolean removeFromStock(Meat meat){
-        if (!meatList.isEmpty()) {
-            meatList.remove(meat);
+        if (!mAllMeat.isEmpty()) {
+            mAllMeat.remove(meat);
             saveStock();
             System.out.println("Stock Saved");
         }
@@ -180,8 +194,8 @@ public class Stock {
     }
 
     public boolean removeFromStock(Produce produce){
-        if (!produceList.isEmpty()) {
-            produceList.remove(produce);
+        if (!mAllProduce.isEmpty()) {
+            mAllProduce.remove(produce);
             saveStock();
             System.out.println("Stock Saved");
         }
@@ -189,8 +203,8 @@ public class Stock {
     }
 
     public boolean addRecipe(Recipe recipe){
-        if (!recipeList.contains(recipe)) {
-            recipeList.add(recipe);
+        if (!mAllRecipes.contains(recipe)) {
+            mAllRecipes.add(recipe);
             saveStock();
             System.out.println("Stock Saved");
             return true;
@@ -199,8 +213,8 @@ public class Stock {
     }
 
     public boolean removeRecipe(Recipe recipe){
-        if (!recipeList.isEmpty()) {
-            recipeList.remove(recipe);
+        if (!mAllRecipes.isEmpty()) {
+            mAllRecipes.remove(recipe);
             saveStock();
             System.out.println("Stock Saved");
             return true;
@@ -300,22 +314,6 @@ public class Stock {
 
     public String generateShoppingList(Recipe recipe){
         return "TODO SHOPPING LIST";
-    }
-
-    public ArrayList<Recipe> getRecipeList() {
-        return recipeList;
-    }
-
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public ArrayList<Meat> getMeatList() {
-        return meatList;
-    }
-
-    public ArrayList<Produce> getProduceList() {
-        return produceList;
     }
 
 
