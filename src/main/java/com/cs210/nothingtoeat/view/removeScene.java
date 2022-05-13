@@ -82,14 +82,13 @@ public class removeScene extends Scene{
       {
           mMeatListView.setItems(Stock.getInstance().getAllMeat());
 
-
       }
       if(list.equals("Produce"))
       {
           mProduceListView.setItems(Stock.getInstance().getAllProduce());
       }
       else{
-          //mIngredientListView.setItems(Stock.getInstance().getAllIngredients());
+          mIngredientListView.setItems(Stock.getInstance().getAllIngredients());
 
       }
 
