@@ -21,11 +21,11 @@ public class addToStockView extends Scene {
     public static final int FONT_SIZE = 25;
 
     //list for Meat CB
-    ObservableList<String> meatOptions =  FXCollections.observableArrayList( "Select Type","Beef", "Pork","Poultry", "Fish", "Shell Fish", "Exotic");
+    ObservableList<String> meatOptions = FXCollections.observableArrayList("Select Type", "Beef", "Pork", "Poultry", "Fish", "Shell Fish", "Exotic");
     ComboBox<String> meatCB = new ComboBox(meatOptions);
 
     //TODO List for produce type for produceType CB
-    ObservableList<String> produceType = FXCollections.observableArrayList( "Select Type","Fruit", "Vegetable", "herbs");
+    ObservableList<String> produceType = FXCollections.observableArrayList("Select Type", "Fruit", "Vegetable", "herbs");
     //TODO - "Type" should be the default
     private ComboBox<String> produceTypeCB = new ComboBox<>(produceType);
     private TextField produceTF = new TextField();
@@ -121,60 +121,55 @@ public class addToStockView extends Scene {
         addToStockVB.getChildren().add(buttonHB);
 
 
-       // addToStockVB.getChildren().add(addButton);
-        addButton.setOnAction(event-> add());
+        // addToStockVB.getChildren().add(addButton);
+        addButton.setOnAction(event -> add());
         returnButton.setOnAction(event -> returnToMenu());
 
-        pane.add(addToStockVB,1,1);
+        pane.add(addToStockVB, 1, 1);
 
 
         this.setRoot(pane);
     }
+
     //thinking user should be able to add from each field at once, or separately
     //TODO the "add" button needs to call this event
-    private void add()
-    {
-       // produceTypeErr.setVisible(false);
+    private void add() {
+        // produceTypeErr.setVisible(false);
         //produceTypeRequiredErr.setVisible(false);
         String name, type;
 
-       if(!(meatCB.getSelectionModel().getSelectedItem() == "Select Type"))
-       {
-           type = meatCB.getSelectionModel().getSelectedItem();
-           Meat m = new Meat(type);
-           //check for dupes
-           stock.addToStock(m);
-       }
-      if(!(produceType.isEmpty()))
-      {
-          type = produceTypeCB.getSelectionModel().getSelectedItem();
-        //  if(type == null)
+        if (!(meatCB.getSelectionModel().getSelectedItem() == "Select Type")) {
+            type = meatCB.getSelectionModel().getSelectedItem();
+            Meat m = new Meat(type);
+            //check for dupes
+            stock.addToStock(m);
+        }
+        if (!(produceType.isEmpty())) {
+            type = produceTypeCB.getSelectionModel().getSelectedItem();
+            //  if(type == null)
             //  produceTypeErr.setVisible(true);
-              //produceTypeRequiredErr.setVisible(true);
-          //if not null runs this code, get an error because Type is null so need to check for this
-         // produceTypeErr.setVisible(type.isEmpty());
-          if (!(type.equals("Select Type"))) {
-              Produce p = new Produce((type));
-              stock.addToStock(p);
-          }
-         //if typeCB was not selected it == null, we want to set a visible error message under the typeCB
-          //when the user selects "add" we do not want to clear this field, because it was not added, include in err message
+            //produceTypeRequiredErr.setVisible(true);
+            //if not null runs this code, get an error because Type is null so need to check for this
+            // produceTypeErr.setVisible(type.isEmpty());
+            if (!(type.equals("Select Type"))) {
+                Produce p = new Produce((type));
+                stock.addToStock(p);
+            }
+            //if typeCB was not selected it == null, we want to set a visible error message under the typeCB
+            //when the user selects "add" we do not want to clear this field, because it was not added, include in err message
 
-      }
-      if(!(dairyTF.getText() == ""))
-      {
-          name = dairyTF.getText();
-          Ingredient i = new Ingredient("Dairy", name);
-          stock.addToStock(i);
-      }
-      if(!(seasoningTF.getText() == ""))
-      {
-          name = seasoningTF.getText();
-          Ingredient i = new Ingredient("Seasoning", name);
-          stock.addToStock(i);
-      }
-        if(!(pantryTF.getText() == ""))
-        {
+        }
+        if (!(dairyTF.getText() == "")) {
+            name = dairyTF.getText();
+            Ingredient i = new Ingredient("Dairy", name);
+            stock.addToStock(i);
+        }
+        if (!(seasoningTF.getText() == "")) {
+            name = seasoningTF.getText();
+            Ingredient i = new Ingredient("Seasoning", name);
+            stock.addToStock(i);
+        }
+        if (!(pantryTF.getText() == "")) {
             name = pantryTF.getText();
             Ingredient i = new Ingredient("Pantry", name);
             stock.addToStock(i);
@@ -186,7 +181,7 @@ public class addToStockView extends Scene {
     }
 
 
-    private void clearInputs(){
+    private void clearInputs() {
 
         produceTF.clear();
         dairyTF.clear();
@@ -198,8 +193,7 @@ public class addToStockView extends Scene {
     }
 
 
-    private void returnToMenu()
-    {
+    private void returnToMenu() {
         ViewNavigator.loadScene("Nothing To Eat", new MainScene());
 
 

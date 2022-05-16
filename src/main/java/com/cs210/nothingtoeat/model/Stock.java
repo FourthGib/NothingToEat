@@ -70,9 +70,15 @@ public class Stock {
         }
     }
 
-    public ObservableList<Ingredient> getAllIngredients(){return mAllIngredients;}
-    public ObservableList<Meat> getAllMeat(){return mAllMeat;}
-    public ObservableList<Produce> getAllProduce(){return mAllProduce;}
+    public ObservableList<Ingredient> getAllIngredients(){
+        populateList(INGREDIENT_FILE);
+        return mAllIngredients;}
+    public ObservableList<Meat> getAllMeat(){
+        populateList(MEAT_FILE);
+        return mAllMeat;}
+    public ObservableList<Produce> getAllProduce(){
+        populateList(PRODUCE_FILE);
+        return mAllProduce;}
 
     public void populateStock(){
         populateList(RECIPE_FILE);
