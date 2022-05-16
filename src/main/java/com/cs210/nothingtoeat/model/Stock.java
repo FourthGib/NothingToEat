@@ -72,6 +72,9 @@ public class Stock {
 
     public ObservableList<Ingredient> getAllIngredients(){
         populateList(INGREDIENT_FILE);
+        for (Ingredient i : mAllIngredients){
+
+        }
         return mAllIngredients;}
     public ObservableList<Meat> getAllMeat(){
         populateList(MEAT_FILE);

@@ -151,8 +151,9 @@ public class addToStockView extends Scene {
             //produceTypeRequiredErr.setVisible(true);
             //if not null runs this code, get an error because Type is null so need to check for this
             // produceTypeErr.setVisible(type.isEmpty());
+            name = produceTF.getText();
             if (!(type.equals("Select Type"))) {
-                Produce p = new Produce((type));
+                Produce p = new Produce((type), name);
                 stock.addToStock(p);
             }
             //if typeCB was not selected it == null, we want to set a visible error message under the typeCB

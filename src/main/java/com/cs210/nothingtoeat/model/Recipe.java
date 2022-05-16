@@ -27,7 +27,7 @@ public class Recipe implements Serializable {
     public Recipe(){
         this.name = "name";
         this.meat = new Meat("meat");
-        this.produce = new Produce("produce");
+        this.produce = new Produce("produce", name);
         this.ingredients = null;
         this.directions = null;
         this.preparation = "";

@@ -64,10 +64,12 @@ public class removeScene extends Scene {
         mMeatListView.setPrefWidth(MainScene.WIDTH);
 
 
-
-        mIngredientListView.setItems(Stock.getInstance().getAllIngredients());
-        mProduceListView.setItems(Stock.getInstance().getAllProduce());
-        mMeatListView.setItems(Stock.getInstance().getAllMeat());
+        ingredientList = Stock.getInstance().getAllIngredients();
+        mIngredientListView.setItems(ingredientList);
+        produceList = Stock.getInstance().getAllProduce();
+        mProduceListView.setItems(produceList);
+        meatList = Stock.getInstance().getAllMeat();
+        mMeatListView.setItems(meatList);
 
         removeVB.getChildren().add(mIngredientListView);
         removeVB.getChildren().add(mMeatListView);
